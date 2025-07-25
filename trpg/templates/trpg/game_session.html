@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ session.scenario.title }} - I Know</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+        body { 
+            display: flex; 
+            flex-direction: column; 
+            height: 100vh; 
+        }
+        header { 
+            background-color: var(--surface-color); 
+            color: var(--on-surface-color); 
+            padding: 15px 20px; 
+            text-align: center; 
+            border-bottom: 1px solid #333;
+        }
+        header h1 { margin: 0; font-size: 1.5em; }
+
+        .chat-container { 
+            flex: 1; 
+            padding: 20px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .message { 
+            max-width: 75%; 
+            padding: 12px 18px; 
+            margin-bottom: 12px; 
+            border-radius: 20px; 
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        .user-message { 
+            background-color: var(--user-message-bg); 
+            color: var(--on-surface-color); 
+            align-self: flex-end; 
+            border-bottom-right-radius: 5px;
+        }
+        .ai-message { 
+            background-color: var(--ai-message-bg); 
+            color: var(--on-surface-color); 
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        .message-time { 
+            font-size: 0.75em; 
+            color: #999; 
+            margin-top: 8px;
+            text-align: right;
+        }
+        .input-container { 
+            display: flex; 
+            padding: 15px; 
+            background-color: var(--surface-color); 
+            border-top: 1px solid #333;
+        }
+        #chat-input { 
+            flex: 1; 
+        }
+        #send-button { 
+            margin-left: 10px; 
+        }
+        #action-options-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+            justify-content: center; /* Center the buttons horizontally */
+            gap: 10px; /* Add space between buttons */
+            padding: 10px 15px;
+            background-color: var(--surface-color);
+            border-top: 1px solid #333;
+        }
+        .action-option-button {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 20px; /* Pill-shaped to match input/send button */
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            font-size: 0.9em;
+            font-weight: 500;
+            text-align: center; /* Center text inside button */
+        }
+        .action-option-button:hover {
+            background-color: var(--primary-color);
+            color: var(--on-primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ session.scenario.title }}</h1>
+        <a href="{% url 'log_view' session.id %}">주요 로그 보기</a>
+    </header>
+
+    <div class="chat-container" id="chat-log" data-session-id="{{ session.id }}">
+        {% for log in logs %}
+            <div class="message {% if log.is_user_message %}user-message{% else %}ai-message{% endif %}">
+                {{ log.message|linebreaksbr }}
+                <div class="message-time">{{ log.timestamp|date:"H:i" }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="action-options-container"></div>
+    <div class="input-container">
+        <input type="text" id="chat-input" placeholder="메시지를 입력하세요...">
+        <button id="send-button">전송</button>
+        {% csrf_token %}
+    </div>
+    <script src="{% static 'js/game_session.js' %}"></script>
+</body>
+</html>

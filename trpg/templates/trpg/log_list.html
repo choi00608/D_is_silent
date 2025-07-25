@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ session.scenario.title }} - 주요 로그</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+        .log-entry {
+            background-color: var(--surface-color);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .log-time {
+            font-size: 0.9em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        .log-message {
+            line-height: 1.6;
+            white-space: pre-wrap; /* Keep line breaks */
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 20px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .back-link:hover {
+            background-color: var(--primary-color);
+            color: var(--on-primary-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ session.scenario.title }} - 주요 로그</h1>
+        {% if major_logs %}
+            {% for log in major_logs %}
+                <div class="log-entry">
+                    <div class="log-time">{{ log.timestamp|date:"Y년 m월 d일 H시 i분" }}</div>
+                    <div class="log-message">{{ log.message|linebreaksbr }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center;">아직 기록된 주요 로그가 없습니다.</p>
+        {% endif %}
+        <div style="text-align: center;">
+            <a href="{% url 'game_session' session.id %}" class="back-link">게임으로 돌아가기</a>
+        </div>
+    </div>
+</body>
+</html>

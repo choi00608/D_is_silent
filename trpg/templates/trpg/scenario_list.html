@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>I Know - 시나리오 선택</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+        .scenario {
+            background-color: var(--surface-color);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .scenario h2 {
+            text-align: left;
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .scenario p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        .scenario form {
+            display: flex;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .scenario input[type="text"] {
+            border-radius: 20px; /* Match button style */
+        }
+        .scenario button {
+            border-radius: 20px; /* Match input style */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>플레이할 시나리오를 선택하세요</h1>
+        {% for scenario in scenarios %}
+            <div class="scenario">
+                <h2>{{ scenario.title }}</h2>
+                <p>{{ scenario.description }}</p>
+                <form action="{% url 'start_game' scenario.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="player_name" placeholder="플레이어 이름을 입력하세요" required>
+                    <button type="submit">시작 또는 이어하기</button>
+                </form>
+            </div>
+        {% empty %}
+            <p style="text-align: center;">플레이할 수 있는 시나리오가 없습니다. 관리자 페이지에서 시나리오를 추가해주세요.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

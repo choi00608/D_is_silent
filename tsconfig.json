@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es6", // Modern browsers support ES6
+    "module": "commonjs",
+    "lib": ["DOM", "ES2017"],
+    "outDir": "./trpg/static/js/", // Compile JS files to this directory
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "./trpg/static/ts/**/*.ts" // Which files to compile
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

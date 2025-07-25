@@ -1,0 +1,27 @@
+{
+  "start_of_game": {
+    "description_for_ai": "게임이 시작됩니다. 플레이어는 낡은 여관에 앉아 있습니다. 비가 내리고, 분위기는 어둡습니다. 플레이어의 이름은 {{player_name}} 입니다.",
+    "keywords": ["시작", "여관", "맥주잔"],
+    "choices": [
+      { "text": "여관 주인에게 말을 건다.", "next_point_id": "talk_to_innkeeper", "is_major": true },
+      { "text": "자리에서 일어나 여관을 둘러본다.", "next_point_id": null, "is_major": false }
+    ]
+  },
+  "talk_to_innkeeper": {
+    "description_for_ai": "플레이어가 여관 주인에게 말을 겁니다. 주인은 '마을 밖 숲에 이상한 유적이 나타났다'는 소문을 이야기하며, '이 지도 조각이라도 도움이 될 거요'라며 아이템을 건네줍니다.",
+    "keywords": ["여관 주인", "주인장", "소문", "유적"],
+    "gives_items": ["유적의 지도 조각"],
+    "choices": [
+      { "text": "유적에 대해 더 자세히 물어본다.", "next_point_id": null, "is_major": false },
+      { "text": "지도를 받고 여관을 나선다.", "next_point_id": "leave_inn", "is_major": true }
+    ]
+  },
+  "leave_inn": {
+    "description_for_ai": "플레이어가 여관을 나와 비 내리는 거리로 나섭니다. 이제 숲으로 향해야 합니다.",
+    "keywords": ["여관을 나온다", "밖으로", "거리로"],
+    "choices": [
+      { "text": "지도를 보며 숲으로 향한다.", "next_point_id": "forest_entrance", "is_major": true },
+      { "text": "마을 사람들에게 유적에 대해 물어본다.", "next_point_id": null, "is_major": false }
+    ]
+  }
+}
