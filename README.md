@@ -39,43 +39,6 @@
 - **AI 응답 재시도 로직:** AI가 유효하지 않은 JSON을 반환했을 때, 자동으로 재시도를 요청하는 로직을 `trpg/views.py`에 구현하여 안정성을 높여야 합니다.
 - **게임 규칙 동적 로딩:** 현재 `GAME_RULES`가 서버 시작 시 로드되는데, 시나리오별로 다른 규칙을 동적으로 로드할 수 있도록 개선해야 합니다.
 
-
-
-## 6. Gemini CLI 사용 가이드
-
-이 프로젝트와 함께 Gemini CLI를 효과적으로 사용하기 위한 가이드입니다.
-
-### 6.1. 프로젝트 개요 및 주요 파일
-
-*   **프로젝트 루트:** `C:/Users/choi0/box/d_is_silent/i_know/`
-*   **주요 백엔드 로직:** `trpg/views.py`
-*   **AI 프롬프트 정의:** `prompt_template.json`, `game_rules.json`
-*   **프론트엔드 TypeScript:** `trpg/static/ts/game_session.ts`
-*   **프론트엔드 HTML:** `trpg/templates/trpg/game_session.html`
-*   **AI 응답 로그:** `conversation_log.json` (프로젝트 루트에 위치)
-
-### 6.2. 개발 환경 설정 및 실행
-
-1.  **Python 가상 환경 활성화:**
-    ```bash
-    # 예시: venv를 사용했다면
-    .\venv\Scripts\activate
-    ```
-2.  **Django 개발 서버 실행:**
-    ```bash
-    python manage.py runserver
-    ```
-    (서버는 기본적으로 `http://127.0.0.1:8000/`에서 실행됩니다.)
-3.  **TypeScript 컴파일:**
-    프론트엔드 TypeScript 파일을 변경한 후에는 반드시 JavaScript로 컴파일해야 합니다.
-    ```bash
-    npx tsc
-    ```
-    또는 변경 사항을 자동으로 감지하여 컴파일하려면:
-    ```bash
-    npx tsc --watch
-    ```
-
 ### 6.3. 디버깅 및 로그 확인
 
 *   **AI 응답 로그 확인:** AI가 생성한 원본 JSON 응답은 `conversation_log.json` 파일에 기록됩니다. 이 파일을 열어 AI의 응답 내용을 직접 확인할 수 있습니다.
@@ -125,6 +88,42 @@
 6.  **전체적인 스타일 통일:
     -   `main.css` 파일을 생성하여 공통 스타일(다크모드 테마, 폰트, 버튼 모양 등)을 분리했습니다.
     -   `game_session.html`, `log_list.html`, `scenario_list.html`에 공통 스타일을 적용하여 일관된 사용자 경험을 제공합니다.
+
+## 6. Gemini CLI 사용 가이드
+
+이 프로젝트와 함께 Gemini CLI를 효과적으로 사용하기 위한 가이드입니다.
+
+### 6.1. 프로젝트 개요 및 주요 파일
+
+*   **프로젝트 루트:** `C:/Users/choi0/box/d_is_silent/i_know/`
+*   **주요 백엔드 로직:** `trpg/views.py`
+*   **AI 프롬프트 정의:** `prompt_template.json`, `game_rules.json`
+*   **프론트엔드 TypeScript:** `trpg/static/ts/game_session.ts`
+*   **프론트엔드 HTML:** `trpg/templates/trpg/game_session.html`
+*   **AI 응답 로그:** `conversation_log.json` (프로젝트 루트에 위치)
+
+### 6.2. 개발 환경 설정 및 실행
+
+1.  **Python 가상 환경 활성화:**
+    ```bash
+    # 예시: venv를 사용했다면
+    .\venv\Scripts\activate
+    ```
+2.  **Django 개발 서버 실행:**
+    ```bash
+    python manage.py runserver
+    ```
+    (서버는 기본적으로 `http://127.0.0.1:8000/`에서 실행됩니다.)
+3.  **TypeScript 컴파일:**
+    프론트엔드 TypeScript 파일을 변경한 후에는 반드시 JavaScript로 컴파일해야 합니다.
+    ```bash
+    npx tsc
+    ```
+    또는 변경 사항을 자동으로 감지하여 컴파일하려면:
+    ```bash
+    npx tsc --watch
+    ```
+
 
 ## 다음 작업 목표 및 초기 프롬프트 가이드
 
